@@ -129,9 +129,78 @@ func FCFSSchedule(w io.Writer, title string, processes []Process) {
 
 //func SJFPrioritySchedule(w io.Writer, title string, processes []Process) { }
 //
-//func SJFSchedule(w io.Writer, title string, processes []Process) { }
-//
-//func RRSchedule(w io.Writer, title string, processes []Process) { }
+
+func SJFSchedule(w io.Writer, title string, processes []Process) {
+	var (
+		serviceTime	int64
+		totalWait	float64
+		totalTurnaround	float64
+		lastCompletion	float64
+		waitingTime	int64
+		schedule	= make([][]string, len(processes))
+		gantt		= make([]TimeSlice, 0)
+	)
+
+	// sort processes with respect to arrival times
+	Process= sort(processes, "AT")
+
+	fmt.Fprintf(output, "%3d Processes\n", ProcessID)
+	fmt.Fprintf(output, "Shortest Job First\n")
+
+	// arrival queue with length 0 and capacity of ProcessID
+	var ArrivalQueue []Process = make([]processes, 0, ProcessID)
+
+	time := 0
+	ArrivalQueue := 0
+
+	for time < usefor {
+		
+		// adds processes to arrival queue
+		for i:=0; i < ProcessID; i++ {
+			if(process[i].ArrivalTime == time) {
+				
+				// Prints processes and arrival times
+				fmt.Fprintf(output, "Time %3d : %s arrived: \n", time, proces[i].name)
+
+				// adds process to arrival queue
+				ArrivalQueue = append(ArrivalQueue, process[i])
+				ArrivalQueue++
+
+			}
+		}
+	}
+ }
+
+ func RRSchedule(w io.Writer, title string, processes []Process) {
+
+	process = sort(process,"AT")
+
+	fmt.Fprintf(output, "%3d processes\n", ProcessID)
+	fmt.Fprintf(out, "Round-Robin\n")
+
+	// arrival queue with length 0 and capacity of ProcessID
+	var ArrivalQueue []Process = make([]processes, 0, ProcessID)
+	var completionQueue []Process = make([]processes, 0, ProcessID)
+	var scheduledProcess ProcessID
+
+	time := 0
+	ArrivalQueue := 0
+	index := 0
+
+	for time < usefor {
+		
+		if((index < ProcessID) && (process[index].ArrivalTime == time)) {
+			
+			fmt.Fprintf(output, "Time %3d : %s arrived\n", time, process[index].name)
+			ArrivalQueue = append(ArrivalQueue, process[index])
+			ArrivalQueue++
+
+			//increment pointer
+			index++
+		}
+		
+	}
+  }
 
 //endregion
 
