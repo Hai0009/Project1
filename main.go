@@ -168,7 +168,37 @@ func SJFSchedule(w io.Writer, title string, processes []Process) {
 
 			}
 		}
+		
+		if (arrivalQueue == 0){
+			fmt.Fprintf(output, "Time %3d ; Idle\n", time)
 	}
+		
+	index := 0
+	PrevProcessID := 0
+		
+	if(arrivalQueueCapacity > 0){
+		
+		for (arrivalQueue[index].completed) {
+			index++
+			}
+		
+		if((index < processCount) &&arrivalQueue[index].selected) {
+			PrevProcessID = arrivalQueue[index].ID
+			}
+		
+		for i:=0; i < len(arrivalQueue); i++ {
+			arrivalQueue[i].selected = false
+			}
+		
+		arrivalQueue = sort(arrivalQueue,"BT")
+		
+		for ((index < processCount) && arrivalQueue[index].completed) {
+			index++
+			}
+		
+		if((index < processCount) && (arrivalQueue[index].ID == PrevProcessID)) {
+			arrivalQueue[index].selected = true
+			}	
  }
 
  func RRSchedule(w io.Writer, title string, processes []Process) {
@@ -199,6 +229,10 @@ func SJFSchedule(w io.Writer, title string, processes []Process) {
 			index++
 		}
 		
+		if (len(arrivalQueue) == 0){
+			fmt.Fprintf(output, "Time %3d : Idle\n", time)
+			time++
+		}
 	}
   }
 
